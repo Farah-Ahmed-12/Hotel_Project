@@ -10,7 +10,7 @@ st.set_page_config(page_title="Hotel Dashboard", layout="wide")
 st.sidebar.title("🏨 Hotel Analytics")
 @st.cache_data
 def load_data():
-    df = pd.read_csv('cleaned_hotel_data.csv')
+    df = pd.read_csv('cleaned_hotel_data.csv.gz')
     return df
 
 df = load_data()
