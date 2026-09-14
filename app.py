@@ -4,9 +4,8 @@ import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 
-st.set_page_config(page_title="Hotel Dashboard", layout="wide")
 
-st.sidebar.title("🏨 Hotel Analytics")
+st.set_page_config(page_title="Hotel Dashboard", layout="wide")
 
 @st.cache_data
 def load_data():
@@ -15,6 +14,8 @@ def load_data():
 
 df = load_data()
 
+st.sidebar.title("🏨 Hotel Analytics")
+
 page = st.sidebar.radio(
     'Pages',
     ['Main Dashboard', 'Analysis', 'Insights and recommendations']
@@ -22,7 +23,6 @@ page = st.sidebar.radio(
 
 st.sidebar.title('Filters')
 
-# إعداد الفلاتر
 nationality_filter = st.sidebar.multiselect(
     'Nationality',
     options=df['nationality'].unique(),
@@ -48,13 +48,13 @@ age_filter = st.sidebar.slider(
     (int(df['age'].min()), int(df['age'].max()))
 )
 
-# تطبيق الفلترة
 filtered_df = df[
     (df['nationality'].isin(nationality_filter)) &
     (df['distributionchannel'].isin(channel_filter)) &
     (df['marketsegment'].isin(market_filter)) &
     (df['age'].between(age_filter[0], age_filter[1]))
 ].copy()
+
 
 
 if page == "Main Dashboard":
@@ -66,8 +66,8 @@ if page == "Main Dashboard":
 
     col1, col2, col3, col4 = st.columns(4)
 
-    total_bookings = filtered_df['total_bookings'].sum()
-    cancel_rate = (filtered_df['bookingscanceled'].sum() / total_bookings * 100) if total_bookings > 0 else 0
+    total_bookings_sum = filtered_df['total_bookings'].sum()
+    cancel_rate = (filtered_df['bookingscanceled'].sum() / total_bookings_sum * 100) if total_bookings_sum > 0 else 0
 
     col1.metric("🧑‍🤝‍🧑 Total Customers", len(filtered_df))
     col2.metric("💰 Total Revenue", f"${filtered_df['total_revenue'].sum():,.0f}")
@@ -75,7 +75,6 @@ if page == "Main Dashboard":
     col4.metric("❌ Cancellation Rate", f"{cancel_rate:.1f}%")
 
     st.markdown("---")
-
 
 elif page == "Analysis":
     st.title("📊 Analysis")
@@ -139,17 +138,15 @@ elif page == "Analysis":
         bins = [0, 30, 60, 90, 180, 365, 100000]
         labels = ['0-30', '31-60', '61-90', '91-180', '181-365', '365+']
 
-        # استخدام نسخة محلية لتفادي التحذيرات والإبطاء
-        analysis_df = filtered_df.copy()
-        analysis_df['lead_bin'] = pd.cut(
-            analysis_df['averageleadtime'],
+        c_df = filtered_df.copy()
+        c_df['lead_bin'] = pd.cut(
+            c_df['averageleadtime'],
             bins=bins,
             labels=labels,
             include_lowest=True
         )
         
-        # إضافة observed=False لمعالجة الـ Warning في الـ Logs
-        cancel_trend = analysis_df.groupby('lead_bin', observed=False)['bookingscanceled'].mean().reset_index()
+        cancel_trend = c_df.groupby('lead_bin', observed=False)['bookingscanceled'].mean().reset_index()
         
         fig = px.line(
             cancel_trend,
@@ -170,10 +167,11 @@ elif page == "Analysis":
 
         rev = filtered_df.groupby('marketsegment', observed=False)['total_revenue'].mean().reset_index()
         
-        # حماية عملية القسمة لمنع ظهور أخطاء أو قيم غير دقيقة
         seg_totals = filtered_df.groupby('marketsegment', observed=False)['total_bookings'].sum()
         seg_cancels = filtered_df.groupby('marketsegment', observed=False)['bookingscanceled'].sum()
-        seg_cancel_rate = (seg_cancels / seg_totals.replace(0, 1) * 100).reset_index()
+        
+        safe_totals = seg_totals.apply(lambda x: x if x > 0 else 1)
+        seg_cancel_rate = ((seg_cancels / safe_totals) * 100).reset_index()
         seg_cancel_rate.columns = ['marketsegment', 'cancel_rate']
 
         merged = rev.merge(seg_cancel_rate, on='marketsegment')
@@ -200,8 +198,7 @@ elif page == "Analysis":
             'bookingsnoshowed': 'sum'
         }).reset_index()
 
-        # تجنب القسمة على صفر
-        safe_booked = channel_grp['total_bookings'].replace(0, 1)
+        safe_booked = channel_grp['total_bookings'].apply(lambda x: x if x > 0 else 1)
         channel_grp['conversion_rate'] = (channel_grp['bookingscheckedin'] / safe_booked * 100).round(1)
         channel_grp['cancel_rate'] = (channel_grp['bookingscanceled'] / safe_booked * 100).round(1)
         channel_grp['noshow_rate'] = (channel_grp['bookingsnoshowed'] / safe_booked * 100).round(1)
@@ -269,13 +266,14 @@ elif page == "Analysis":
         num_df = filtered_df.select_dtypes(include='number')
         if not num_df.empty and 'total_revenue' in num_df.columns:
             corr = num_df.corr()
-            revenue_corr = corr['total_revenue'].drop('total_revenue', errors='ignore').dropna()
-            fig = px.bar(
-                x=revenue_corr.values, y=revenue_corr.index, orientation='h',
-                color=revenue_corr.values, color_continuous_scale='RdBu',
-                title="What affects Total Revenue"
-            )
-            st.plotly_chart(fig, use_container_width=True)
+            if 'total_revenue' in corr:
+                revenue_corr = corr['total_revenue'].drop('total_revenue', errors='ignore').dropna()
+                fig = px.bar(
+                    x=revenue_corr.values, y=revenue_corr.index, orientation='h',
+                    color=revenue_corr.values, color_continuous_scale='RdBu',
+                    title="What affects Total Revenue"
+                )
+                st.plotly_chart(fig, use_container_width=True)
 
         def cohort_group(x):
             if x <= 30:
@@ -312,7 +310,6 @@ elif page == "Analysis":
             "srnearelevator", "srawayfromelevator", "srnoalcoholinminibar", "srquietroom"
         ]
         
-        # التأكد من وجود الأعمدة قبل الحساب
         existing_sr_cols = [col for col in sr_cols if col in filtered_df.columns]
         if existing_sr_cols:
             counts = filtered_df[existing_sr_cols].sum().sort_values()
@@ -337,6 +334,8 @@ elif page == "Analysis":
         )
         fig.update_layout(geo=dict(showframe=False))
         st.plotly_chart(fig, use_container_width=True)
+
+
 
 else:
     st.title("Strategic Insights & Recommendations")
@@ -448,3 +447,4 @@ else:
     st.divider()
     st.markdown("""
     **General Note:** Other market segments like **Groups** and **Travel Agents** show strong performance with high profitability and very low cancellation rates, providing a stable base for the hotel.""")
+    
