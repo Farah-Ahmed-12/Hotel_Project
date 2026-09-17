@@ -4,3 +4,4 @@ numpy
 pandas
 plotly
 pillow==10.0.1
+statsmodels
