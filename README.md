@@ -94,7 +94,8 @@ Booking status mix, market segment distribution, and booking vs no-booking engag
 <table>
   <tr>
     <img width="1904" height="857" alt="Screenshot (2174)" src="https://github.com/user-attachments/assets/1e41e67c-5c20-402f-83b1-018a21abf778" />
-<tr>
+<table>
+  <tr>
     <img width="1920" height="867" alt="Screenshot (2175)" src="https://github.com/user-attachments/assets/c9a58590-94a6-4741-bbee-1961f06ab351" />
 
 ####  Cancellation Analysis
@@ -103,15 +104,14 @@ Cancellations by lead time, revenue vs cancellation rate per segment (dual axis)
 <table>
   <tr>
     <img width="1920" height="877" alt="Screenshot (2176)" src="https://github.com/user-attachments/assets/deb1b624-e448-410d-9f22-47157fc93509" />
-
+<table>
+  <tr>
     <img width="1920" height="837" alt="Screenshot (2177)" src="https://github.com/user-attachments/assets/b3066e5e-46eb-4189-b74e-4a66bb101ef8" />
 
-  </tr>
+<table>
   <tr>
    <img width="1920" height="856" alt="Screenshot (2178)" src="https://github.com/user-attachments/assets/4410dcf2-801e-4df4-bc0d-6eb0030f9f32" />
 
-  </tr>
-</table>
 
 ####  Revenue Analysis
 Revenue sources, revenue by channel and segment, room nights vs revenue (OLS trendline),correlation-based revenue factors, and revenue by customer cohort.
@@ -119,16 +119,18 @@ Revenue sources, revenue by channel and segment, room nights vs revenue (OLS tre
 <table>
   <tr>
     <img width="1905" height="854" alt="Screenshot (2179)" src="https://github.com/user-attachments/assets/4ae34719-d002-4bb2-941e-4bad851135b5" />
-
+<table>
+  <tr>
     <img width="1920" height="811" alt="Screenshot (2180)" src="https://github.com/user-attachments/assets/54bc0679-f5aa-4cab-8a47-c34ffd6891b4" />
-
+<table>
+  <tr>
     <img width="1556" height="743" alt="Screenshot (2181)" src="https://github.com/user-attachments/assets/53402375-b771-4562-b58a-be0504c3d65e" />
 
-
-  </tr>
+<table>
   <tr>
     <img width="1913" height="710" alt="Screenshot (2182)" src="https://github.com/user-attachments/assets/60960b08-c059-473a-b766-de32d648f290" />
-
+<table>
+  <tr>
     <img width="1913" height="681" alt="Screenshot (2183)" src="https://github.com/user-attachments/assets/94606592-c54d-4969-9a27-9129f854aa84" />
 
   </tr>
@@ -140,7 +142,8 @@ Special room requests and a world map of customer nationalities.
 <table>
   <tr>
 <img width="1504" height="838" alt="Screenshot (2184)" src="https://github.com/user-attachments/assets/843119c3-f450-4b47-b75b-722fa512c3d5" />
-
+<table>
+  <tr>
 <img width="1516" height="545" alt="Screenshot (2185)" src="https://github.com/user-attachments/assets/c81cd665-7c45-4d1a-a6ef-ca8a49eaa467" />
 
   </tr>
@@ -152,13 +155,15 @@ Two tabs that turn the analysis into decisions: **Market Segment Analysis** and 
 <table>
   <tr>
     <img width="1914" height="757" alt="Screenshot (2186)" src="https://github.com/user-attachments/assets/678978ea-dda1-495f-8045-45669736c7e4" />
-
+<table>
+  <tr>
     <img width="1905" height="862" alt="Screenshot (2187)" src="https://github.com/user-attachments/assets/17aeba52-7928-432e-b985-05a5873c34b9" />
 
   </tr>
   <tr>
     <img width="1920" height="695" alt="Screenshot (2188)" src="https://github.com/user-attachments/assets/a80232a0-de99-4b4c-a4c3-e6976e6a3554" />
-
+<table>
+  <tr>
    <img width="1920" height="787" alt="Screenshot (2189)" src="https://github.com/user-attachments/assets/825cb98b-8135-43bf-bbcd-a0f71b8466bc" />
 
   </tr>
