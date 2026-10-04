@@ -94,11 +94,8 @@ Booking status mix, market segment distribution, and booking vs no-booking engag
 <table>
   <tr>
     <img width="1904" height="857" alt="Screenshot (2174)" src="https://github.com/user-attachments/assets/1e41e67c-5c20-402f-83b1-018a21abf778" />
-
+<tr>
     <img width="1920" height="867" alt="Screenshot (2175)" src="https://github.com/user-attachments/assets/c9a58590-94a6-4741-bbee-1961f06ab351" />
-
-  </tr>
-</table>
 
 ####  Cancellation Analysis
 Cancellations by lead time, revenue vs cancellation rate per segment (dual axis), and conversion / cancel / no-show rates per channel.
