@@ -8,8 +8,6 @@ An end-to-end data analytics project that turns **83K+ raw hotel booking records
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?logo=streamlit&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)
 
-![Main Dashboard](images/01-main-dashboard.png)
-
 ---
 
 ##  Project Overview
@@ -209,20 +207,6 @@ Two tabs that turn the analysis into decisions: **Market Segment Analysis** and 
 - **Pandas / NumPy**: cleaning, aggregation, feature engineering
 - **Plotly Express & Graph Objects**: interactive charts (donut, dual-axis, scatter with OLS trendline, choropleth map)
 - **Streamlit**: multi-page interactive dashboard with sidebar filters
-
----
-
-##  Project Structure
-
-```
-hotel-analytics-dashboard/
-├── Hotel_Analysis_Complete.ipynb   # Cleaning, EDA, feature engineering
-├── app.py                          # Streamlit dashboard
-├── cleaned_hotel_data.csv.gz       # Cleaned dataset used by the app
-├── requirements.txt
-└── README.md
-```
-
 ---
 
 > `statsmodels` is required for the OLS trendline, and `openpyxl` is only needed to re-run the notebook on the original Excel file.
