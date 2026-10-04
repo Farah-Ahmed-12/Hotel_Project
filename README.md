@@ -85,7 +85,7 @@ The Streamlit app has **3 pages**. A global sidebar filter (Nationality, Distrib
 Dataset preview plus four headline KPIs: Total Customers, Total Revenue, Avg Revenue/Night, and Cancellation Rate.
 
 <p align="center">
-  <img src="images/02-sidebar-filters.png" width="85%" alt="Sidebar filters">
+  <img width="1920" height="930" alt="Screenshot (2173)" src="https://github.com/user-attachments/assets/d56fb79a-c1d0-4494-9674-2b1fb27543d6" />
 </p>
 
 ### 2️ Analysis (4 tabs)
